@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.nio.file.*; 
 
 public class Repetition {
     public static void main(String[] args)
@@ -16,26 +17,14 @@ public class Repetition {
             if (i)
         }
 
-        return returnStr;
     }
 
-    public static List<String> readDatFile(String filename) 
-    {
-        List<String> lines = new ArrayList<>();
-    
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) 
-        {
-            String line;
-            int count = 0;
-    
-            while ((line = reader.readLine()) != null) 
-            {
-                lines.add(line);
-                count++;
-            }
+    public static List<String> readDatFile(String filename) {
+        try {
+            return Files.readAllLines(Path.of(filename));
         } catch (IOException e) {
             System.err.println("readDatFile error: " + e.getMessage());
+            return List.of();
         }
-        return lines;
     }
 }

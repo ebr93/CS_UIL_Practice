@@ -2,7 +2,6 @@ package Problem_Earthquake;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.*;    // Required for Stream and Collectors
 import java.nio.file.*;  
 
 public class Earthquake {
@@ -48,12 +47,11 @@ public class Earthquake {
 
 
     public static List<String> readDatFile(String filename) {
-        // Use try-with-resources to ensure the file stream is closed
-        try (Stream<String> stream = Files.lines(Paths.get(filename))) {
-            return stream.collect(Collectors.toList());
+        try {
+            return Files.readAllLines(Path.of(filename));
         } catch (IOException e) {
             System.err.println("readDatFile error: " + e.getMessage());
-            return List.of(); // Return empty list instead of null for safety
+            return List.of();
         }
     }
 }
